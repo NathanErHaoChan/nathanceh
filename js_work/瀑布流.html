@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>瀑布流</title>
+<style>
+	*{padding:0;margin:0;list-style:none;}
+	div{overflow:hidden;width:940px;margin:0 auto;}
+	ul{float:left;width:300px;margin-left:20px;/*background:pink;*/}
+	ul:first-child{margin-left:0;}
+	ul li{width:250px;margin:10px auto/*;background:red;height:20px;*/}
+	ul li img{width:100%;}
+</style>
+<script>
+	function ran(n,m){
+		return parseInt(Math.random()*(m-n)+n);
+	}
+	function createLi(){
+		var count=ran(0,20);
+		var oLi=document.createElement('li');
+		var oImg=document.createElement('img');
+		oImg.src='../images/work/waterfall/waterfall'+count+'.jpg';
+		oLi.appendChild(oImg);
+		
+		return oLi;
+	}
+	window.onload=function(){
+		var oBox=document.getElementById('box');
+		var aUl=oBox.getElementsByTagName('ul');
+		//var n=0;
+		
+		function createLi20(){
+			for(var j=0;j<20;j++){			
+				var oLi=createLi();
+				
+				var arrUl=[];
+				for(var i=0;i<aUl.length;i++){
+					arrUl.push(aUl[i]);
+				}
+				
+				arrUl.sort(function(ul1,ul2){
+					return ul1.offsetHeight-ul2.offsetHeight;
+				});
+				
+				var oMinUl=arrUl[0];
+				oMinUl.appendChild(oLi);
+				//n++;
+			}
+		}
+		
+		createLi20();
+		
+		window.onresize=window.onscroll=function(){
+			var scrollT=document.body.scrollTop||document.documentElement.scrollTop;
+			var clientH=document.documentElement.clientHeight;
+			var scrollH=document.documentElement.scrollHeight;
+			
+			var scrollB=scrollT+clientH;
+			
+			if(scrollB>=scrollH){
+				createLi20();
+			}
+		};
+	};
+</script>
+</head>
+
+<body>
+	<div id="box">
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>
+    </div>
+</body>
+</html>

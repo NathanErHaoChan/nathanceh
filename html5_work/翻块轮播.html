@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>翻块轮播</title>
+	<style type="text/css">
+		body{
+			background:#B68F6D url(../images/work/noise.png);
+		}
+		.container{
+			width: 700px;
+			height: 400px;
+			margin: 30px auto;
+			border: 10px solid rgb(255,255,255);
+			position: relative;
+			transform-style: preserve-3d;
+			perspective: 800px;
+		}
+		.block{
+			width: 100px;
+			height: 100px;
+			float: left;
+			position: relative;
+			transform-style: preserve-3d;
+		}
+		.front,.back{
+			width: 100px;
+			height: 100px;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.front{
+			z-index: 200;
+			backface-visibility: hidden;
+		}
+		.back{
+			z-index: 199;
+			transform: scale(-1,1);
+		}
+	</style>
+</head>
+<body>
+	<div class="container"></div>
+	<script type="text/javascript">
+		var oContainer=document.querySelector('.container');
+
+		var cols=7;
+		var rows=4;
+
+		var currentIndex=0;
+		for (var row = 0; row < rows; row++) {
+			for (var col = 0; col < cols; col++) {
+				var oDiv=document.createElement('div');
+				oDiv.classList.add('block');
+				oDiv.dataset.col=col;
+				oDiv.dataset.row=row;
+				oContainer.appendChild(oDiv);
+
+				var oFront=document.createElement('div');
+				oFront.classList.add('front');
+				oFront.style.backgroundImage=`url(../images/work/show${currentIndex}.jpg)`;
+				oFront.style.backgroundPosition=`${-col*100}px ${-row*100}px`;
+				oDiv.appendChild(oFront);
+
+				var oBack=document.createElement('div');
+				oBack.classList.add('back');
+				oBack.style.backgroundImage=`url(../images/work/show${currentIndex+1}.jpg)`;
+				oBack.style.backgroundPosition=`${-col*100}px ${-row*100}px`;
+				oDiv.appendChild(oBack);
+			}
+		}
+		var aDiv=document.querySelectorAll('.block');
+		document.onclick=function(){
+			aDiv.forEach(function(oDiv,index){
+				var col=oDiv.dataset.col;
+				var row=oDiv.dataset.row;
+				oDiv.style.transition=`1s ${(Number(col)+Number(row))*0.2}s`;
+				oDiv.style.transform=`rotateY(180deg)`;
+			});
+		};
+		aDiv[aDiv.length-1].addEventListener('transitionend',function(){
+			currentIndex++;
+
+			aDiv.forEach(function(oDiv,index){
+				oDiv.style.transition=``;
+				oDiv.style.transform=``;
+
+				var oFront=oDiv.children[0];
+				var oBack=oDiv.children[1];
+				oFront.style.backgroundImage=`url(../images/work/show${currentIndex%3}.jpg)`;
+				oBack.style.backgroundImage=`url(../images/work/show${(currentIndex+1)%3}.jpg)`;
+			});
+
+		},false);
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas动画</title>
+</head>
+<body>
+	<canvas width="600" height="600"></canvas>
+	<script>
+		var canvas=document.querySelector('canvas');
+
+		var ctx=canvas.getContext('2d');
+
+		var count=10;
+
+		var oImage =new Image();
+		oImage.src="../images/work/bg_kaleidos3.jpg";
+
+		var delta=0;
+
+		oImage.onload=function(){
+			var pattern=ctx.createPattern(oImage,'repeat');
+
+			setInterval(function(){
+				for (var i = 0; i < 18; i++) {
+					ctx.beginPath();
+
+					ctx.save();
+						ctx.fillStyle=pattern;
+						ctx.translate(300,300);
+						ctx.rotate(d2a(20+i) + delta);
+						ctx.moveTo(0,0);
+						ctx.arc(0,0,200,d2a(0+delta),d2a(20+delta),false);
+						ctx.closePath();
+						ctx.fill();
+					ctx.restore();
+				}
+			},16);
+
+			setInterval(function(){
+				delta++;
+			},30);
+		};
+
+		function d2a(degree){
+			return degree*Math.PI/180;
+		}
+	</script>
+</body>
+</html>

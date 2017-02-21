@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+	.box{width:20px;height:20px;position:absolute;background:#000;left:0;top:0;border-radius:50%;/*opacity:0;*/}
+</style>
+<script>
+	function drag(oDiv){
+		oDiv.onmousedown=function(ev){
+			clearInterval(oDiv.timer);
+			var speedX=0;
+			var speedY=0;
+			var lastX=oDiv.offsetLeft;
+			var lastY=oDiv.offsetTop;
+			
+			var e=ev||event;
+			var disX=e.clientX-oDiv.offsetLeft;
+			var disY=e.clientY-oDiv.offsetTop;
+			document.onmousemove=function(ev){
+				var e=ev||event; 
+				oDiv.style.left=e.clientX-disX+'px';
+				oDiv.style.top=e.clientY-disY+'px';
+				
+				speedX=oDiv.offsetLeft-lastX;
+				speedY=oDiv.offsetTop-lastY;
+				
+				lastX=oDiv.offsetLeft;
+				lastY=oDiv.offsetTop;
+			};
+			document.onmouseup=function(){
+				document.onmousemove=document.onmouseup=null;
+				 console.log(speedX,speedY);//取出速度
+				move(oDiv,speedX,speedY);
+			};
+			return false;
+		};
+	}
+	function move(obj,speedX,speedY){
+		clearInterval(obj.timer);
+		obj.timer=setInterval(function(){
+			speedY++;
+			var l=obj.offsetLeft+speedX;
+			var t=obj.offsetTop+speedY;
+			if(t>=document.documentElement.clientHeight-obj.offsetHeight){
+				t=document.documentElement.clientHeight-obj.offsetHeight//限定
+				speedY*=-1;//反向
+				speedY*=0.7;//衰减
+				speedX*=0.7;
+			}else if(t<=0){
+				t=0;
+				speedY*=-1;//反向
+				speedY*=0.7;//衰减
+				speedX*=0.7;
+			}
+			if(l>=document.documentElement.clientWidth-obj.offsetWidth){
+				l=document.documentElement.clientWidth-obj.offsetWidth;
+				speedX*=-1;
+				speedX*=0.7;
+				speedY*=0.7;
+			}else if(l<=0){
+				l=0;
+				speedX*=-1;
+				speedX*=0.7;
+				speedY*=0.7;
+			}
+			obj.style.left=l+'px';
+			obj.style.top=t+'px';
+			
+			//关闭定时器
+			if(Math.abs(speedX)<1&&Math.abs(speedY)<1&&t==document.documentElement.clientHeight-obj.offsetHeight){
+				console.log('可算好了');	
+				clearInterval(obj.timer);
+				obj.parentNode.removeChild(obj);
+			}
+		},30);
+	}
+	function addBox(){
+		var oDiv=document.createElement('div');
+		oDiv.className='box';
+		oDiv.style.background='rgb('+rnd(0,256)+','+rnd(0,256)+','+rnd(0,256)+')'
+		document.body.appendChild(oDiv);
+		move(oDiv,rnd(4,18),rnd(3,14));
+		drag(oDiv);
+	}
+	function rnd(n,m){return parseInt(n+Math.random()*(m-n))}
+	window.onload=function(){
+		var count=100;
+		for(var i=0;i<count;i++){
+			setTimeout(addBox,rnd(0,10000));
+		}
+	};
+	function rnd(n,m){
+		return parseInt(Math.random()*(m-n)+n);
+	}
+</script>
+</head>
+
+<body>
+	<div id="div1"></div>
+</body>
+</html>

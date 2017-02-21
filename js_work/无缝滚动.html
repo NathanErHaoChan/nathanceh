@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无缝滚动</title>
+<style>
+	*{margin:0;padding:0;list-style:none;}
+	.controls{text-align: center;}
+	input{display:inline-block;padding:10px;font-size:20px;}
+	#box{width:880px;height:220px;border:1px solid #000;margin:100px auto;position:relative;overflow:hidden;}
+	#ul1{position:absolute;top:0;left:0;}
+	#ul1 li{width:200px;height:200px;float:left;padding:10px;}
+	#ul1 li img{width:100%;height:100%;}
+</style>
+<script>
+	window.onload=function(){
+		var oBox=document.getElementById('box');
+		var oUl=document.getElementById('ul1');
+		var aLi=oUl.children;
+		var oLBtn=document.getElementById('left');
+		var oRBtn=document.getElementById('right');
+		
+		oUl.innerHTML+=oUl.innerHTML;
+		oUl.style.width=aLi[0].offsetWidth*aLi.length+'px';
+		
+		var n=0;
+		var timer=null;
+		oRBtn.onclick=function(){
+			clearInterval(timer);
+			timer=setInterval(function(){
+				n+=5;
+				if(n>0){
+					n=-oUl.offsetWidth/2;
+				}
+				oUl.style.left=n+'px';
+			},30);
+		};
+		oLBtn.onclick=function(){
+			toLeft();
+		};
+		function toLeft(){
+			clearInterval(timer);
+			timer=setInterval(function(){
+				n-=5;
+				if(n<-oUl.offsetWidth/2){
+					n=0;
+				}
+				oUl.style.left=n+'px';
+			},30);
+		};
+		toLeft();
+		oBox.onmouseover=function(){
+			clearInterval(timer);
+		};
+		oBox.onmouseout=function(){
+			toLeft();
+		};
+	};
+</script>
+</head>
+
+<body>
+    <div id="box">
+   		<ul id="ul1">
+        	<li><img src="../images/work/SeamlessScrolling1.jpg"/></li>
+        	<li><img src="../images/work/SeamlessScrolling2.jpg"/></li>
+            <li><img src="../images/work/SeamlessScrolling3.jpg"/></li>
+            <li><img src="../images/work/SeamlessScrolling4.jpg"/></li>
+        </ul>
+    </div>
+    <div class="controls">
+		<input type="button" value="左" id="left"/>
+	    <input type="button" value="右" id="right"/>
+    </div>
+</body>
+</html>

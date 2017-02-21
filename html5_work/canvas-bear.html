@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas running bear</title>
+	<style>
+		body{
+			background-color: black;
+		}
+
+		canvas{
+			/*background-color: white;*/
+			transform: translate(300px,200px);
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="200" height="100"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+
+		var ctx = canvas.getContext('2d');
+
+		var oImage = new Image();
+
+		oImage.src = '../images/work/bear.png';
+
+		var index = 0;
+
+		oImage.onload = function(){			
+			setInterval(function(){
+				ctx.clearRect(0,0,300,300)
+
+				ctx.drawImage(oImage,
+					(index%8)*200,0,200,100,
+					0,0,200,100
+				)
+			},16)
+
+			setInterval(function(){
+				index ++;
+			},60);
+		}
+	</script>
+</body>
+</html>

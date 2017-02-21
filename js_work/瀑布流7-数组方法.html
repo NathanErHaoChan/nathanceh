@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+	*{margin:0;padding:0;list-style:none;}
+	ul{width:280px;border:1px solid #ccc;float:left;margin:10px;}
+	ul li{width:240px;margin:10px auto;}
+</style>
+<script>
+	function ran(n,m){
+		return parseInt(Math.random()*(m-n)+n);
+	}
+	function createLi(){
+		var oLi=document.createElement('li');
+		oLi.style.height=ran(100,600)+'px';
+		oLi.style.background='rgb('+ran(1,256)+','+ran(1,256)+','+ran(1,256)+')';
+		return oLi;
+	}
+	window.onload=function(){
+		var aUl=document.getElementsByTagName('ul');
+		
+		function createLi20(){
+			for(var i=0;i<20;i++){
+				var oLi=createLi();
+				
+				var arrUl=[];
+				for(var j=0;j<aUl.length;j++){
+					arrUl.push(aUl[j]);
+				}
+				arrUl.sort(function(ul1,ul2){
+					return ul1.offsetHeight-ul2.offsetHeight;
+				});
+				
+				arrUl[0].appendChild(oLi);
+			}
+		}
+		createLi20();
+		
+		window.onresize=window.onscroll=function(){
+			//可视区高度
+			var clientH=document.documentElement.clientHeight;
+			//上面的滚动距离
+			var scrollT=document.body.scrollTop || document.documentElement.scrollTop;
+			//页面高度
+			var iCount=document.documentElement.scrollHeight;
+			
+			var scrollB=clientH+scrollT;
+			//alert(clientH);
+			if(scrollB>=(iCount-500)){
+				//alert('我要加载了');
+				createLi20();
+			}
+		};	
+	};
+</script>
+</head>
+
+<body>
+	<ul></ul>
+    <ul></ul>
+    <ul></ul>
+</body>
+</html>

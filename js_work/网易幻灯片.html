@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>网易幻灯片</title>
+<link rel="stylesheet" type="text/css" href="../css/common.css">
+<style>
+    .wrapper{
+        width: 1224px;
+        height: 630px;
+        position: relative;
+        margin: 0 auto;
+    }
+    .slide{
+        width: 1224px;
+        height: 500px;
+        overflow: hidden;
+        position: relative;
+    }
+    .slide .imgwrap{
+        width: 9999px;
+        height: 500px;
+        position: absolute;
+    }
+    .slide .banner{
+        float: left;
+        width: 1224px;
+        height: 500px;
+    }
+    .slide .banner-0{background:url(../images/work/banner_00.jpg);}
+    .slide .banner-1{background:url(../images/work/banner_01.jpg);}
+    .slide .banner-2{background:url(../images/work/banner_02.jpg);}
+    .slide .banner-3{background:url(../images/work/banner_03.jpg);}
+    .slide .banner-4{background:url(../images/work/banner_04.jpg);}
+    .slide .banner-5{background:url(../images/work/banner_05.jpg);}
+    .nav_bar{position: absolute;bottom: 0;}
+    .nav_bar .navwrap{
+        width:100%;
+        height: 162px;
+        cursor:pointer;
+    }
+    .nav_bar .navwrap .subnav{
+        float: left;
+    }
+    .nav_bar .navwrap .subnav .nav{
+        width: 204px;
+        height: 162px;
+    }
+    .nav_bar .navwrap .subnav-0 .nav{background:url(../images/work/sbanner_00.png) right center;}
+    .nav_bar .navwrap .subnav-1 .nav{background:url(../images/work/sbanner_01.png) right center;}
+    .nav_bar .navwrap .subnav-2 .nav{background:url(../images/work/sbanner_02.png) right center;}
+    .nav_bar .navwrap .subnav-3 .nav{background:url(../images/work/sbanner_03.png) right center;}
+    .nav_bar .navwrap .subnav-4 .nav{background:url(../images/work/sbanner_04.png) right center;}
+    .nav_bar .navwrap .subnav-5 .nav{background:url(../images/work/sbanner_05.png) right center;}
+    .nav_bar .prcsswrap{height:5px;position: relative;}
+    .nav_bar .prcss{position:absolute;left:0;height:5px;width:0px;}
+    .nav_bar .subnav-0 .prcsswrap{background-color:#7b5596;}
+    .nav_bar .subnav-0 .prcss{background-color:#49047a;}
+    .nav_bar .subnav-1 .prcsswrap{background-color:#83a2cc;}
+    .nav_bar .subnav-1 .prcss{background-color:#13478f;}
+    .nav_bar .subnav-2 .prcsswrap{background-color:#e18e40;}
+    .nav_bar .subnav-2 .prcss{background-color:#b94e00;}
+    .nav_bar .subnav-3 .prcsswrap{background-color:#47acab;}
+    .nav_bar .subnav-3 .prcss{background-color:#00605f;}
+    .nav_bar .subnav-4 .prcsswrap{background-color:#c86c8c;}
+    .nav_bar .subnav-4 .prcss{background-color:#a41a4a;}
+    .nav_bar .subnav-5 .prcsswrap{background-color:#9089d6;}
+    .nav_bar .subnav-5 .prcss{background-color:#4a419e;}
+
+    .clearfix:after{display: block;clear: both;visibility:hidden;height:0;overflow:hidden;content:".";}
+    .clearfix{zoom:1;}
+</style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="slide" id="slide">
+            <div class="imgwrap clearfix">
+                <div class="banner banner-0"></div>
+                <div class="banner banner-1"></div>
+                <div class="banner banner-2"></div>
+                <div class="banner banner-3"></div>
+                <div class="banner banner-4"></div>
+                <div class="banner banner-5"></div>
+            </div>
+        </div>
+        <div class="nav_bar" id="nav_bar">
+            <ul class="navwrap clearfix">
+                <li class="subnav subnav-0">
+                    <div class="nav"></div>
+                    <div class="prcsswrap">
+                        <span class="prcss"></span>
+                    </div>
+                </li>
+                <li class="subnav subnav-1">
+                    <div class="nav"></div>
+                    <div class="prcsswrap">
+                        <span class="prcss"></span>
+                    </div>
+                </li>
+                <li class="subnav subnav-2">
+                    <div class="nav"></div>
+                    <div class="prcsswrap">
+                        <span class="prcss"></span>
+                    </div>
+                </li>
+                <li class="subnav subnav-3">
+                    <div class="nav"></div>
+                    <div class="prcsswrap">
+                        <span class="prcss"></span>
+                    </div>
+                </li>
+                <li class="subnav subnav-4">
+                    <div class="nav"></div>
+                    <div class="prcsswrap">
+                        <span class="prcss"></span>
+                    </div>
+                </li>
+                <li class="subnav subnav-5">
+                    <div class="nav"></div>
+                    <div class="prcsswrap">
+                        <span class="prcss"></span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+<script src="../js/onMove.js"></script>
+<script>
+    var oSlide=document.getElementById('slide');
+    var oImageWrap=oSlide.children[0];
+    var oNavBar=document.getElementById('nav_bar');
+    var aSpan=oNavBar.getElementsByTagName('span');
+
+
+    oImageWrap.style.width=oImageWrap.children[0].offsetWidth*oImageWrap.children.length+'px';
+
+    var n=0;
+    function next(){
+        for (var i = 0; i < aSpan.length; i++) {
+            aSpan[i].style.width=0;
+        }
+        move(aSpan[n],{width:204},{duration:1500,complete:function(){
+            n++;
+            if(n==aSpan.length){n=0;}
+            move(oImageWrap,{left:-n*oImageWrap.children[0].offsetWidth},{complete:next})
+        }})
+    }
+    next();
+</script>
+</body>
+</html>

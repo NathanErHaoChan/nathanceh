@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>钟表</title>
+	<style type="text/css">
+		.clock{
+			width: 200px;
+			height: 200px;
+			border: 2px solid black;
+			border-radius: 50%;
+			position: relative;
+			margin:30px auto;
+		}
+		.hour{
+			width: 10px;
+			height: 30px;
+			background: black;
+			position: absolute;
+			left: 95px;
+			top:70px;
+		}
+		.minute{
+			width: 6px;
+			height: 50px;
+			background: black;
+			position: absolute;
+			left: 97px;
+			top:50px;
+		}
+		.second{
+			width: 4px;
+			height: 80px;
+			background: black;
+			position: absolute;
+			left: 98px;
+			top:20px;
+		}
+		.hour,
+		.minute,
+		.second{
+			transform-origin: center bottom;
+		}
+		.tab{
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			background-image: radial-gradient(silver,black);
+			position: absolute;
+			left: 93px;
+			top:93px;
+		}
+		.exactlyhour{
+			width: 2px;
+			height: 4px;
+			background: black;
+			position: absolute;
+			top:0;
+			left:99px;
+			transform-origin: center 100px;
+			line-height: 30px;
+		}
+		.word{
+			width: 20px;
+			text-align: center;
+			margin-left: -10px;
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div class="clock" id="clock">
+		<div class="hour" id="hour"></div>
+		<div class="minute" id="minute"></div>
+		<div class="second" id="second"></div>
+		<div class="tab" id="tab"></div>
+	</div>
+	<script type="text/javascript">
+		var oClock=document.getElementById('clock');
+		var oMinute=document.getElementById('minute');
+		var oSecond=document.getElementById('second');
+		var oHour=document.getElementById('hour');
+
+		function clock(){
+			var date=new Date();
+			var hour=date.getHours();
+			var minute=date.getMinutes();
+			var second=date.getSeconds();
+
+			oHour.style.transform=`rotate(${360/12*hour}deg)`;
+			oMinute.style.transform=`rotate(${360/60*minute}deg)`;
+			oSecond.style.transform=`rotate(${360/60*second}deg)`;
+		}
+		clock();
+		setInterval(clock,1000);
+
+		for(var i=0;i<60;i++){
+			var oDiv=document.createElement('div');
+			oDiv.className='exactlyhour';
+			oClock.appendChild(oDiv);
+			oDiv.style.transform=`rotate(${i*6}deg)`;
+			if(i%5==0){
+				oDiv.style.height='8px';
+
+				var oDiv2=document.createElement('div');
+				oDiv2.className='word';
+				oDiv2.innerText=i?i/5:12;
+				oDiv2.style.transform=`rotate(${-i*6}deg)`;
+				oDiv.appendChild(oDiv2);
+			}
+		}
+	</script>
+</body>
+</html>

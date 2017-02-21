@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>苹果菜单</title>
+<style>
+	*{ margin:0; padding:0;}
+	.per{width: 900px;margin: 0 auto;}
+	#box{width:100%; text-align:center; position:absolute; bottom:0;}
+	#box img{width:64px;}
+</style>
+<script>
+	window.onload=function(){
+		var oBox=document.getElementById('box');
+		var aImg=oBox.children;
+		var aIn=document.getElementsByTagName('input');
+		
+		document.onmousemove=function(ev){
+			var oEvent=ev||event;
+			
+			for(var i=0;i<aImg.length;i++){
+				var b=aImg[i].offsetLeft+aImg[i].offsetWidth/2-oEvent.clientX;
+				var a=aImg[i].offsetTop+oBox.offsetTop+aImg[i].offsetHeight/2-oEvent.clientY;	
+				
+				var c=Math.sqrt(a*a+b*b);
+				var scale=1-c/500;
+				
+				scale<0.5 && (scale=0.5);
+				
+				aIn[i].value=scale;
+				aImg[i].style.width=128*scale+'px';
+			}	
+		};
+	};
+</script>
+</head>
+
+<body>
+<div class="per">
+	<input type="text"/>
+	<input type="text"/>
+	<input type="text"/>
+	<input type="text"/>
+	<input type="text"/>
+</div>
+<div id="box">
+	<img src="../images/work/iphone1.png"/>
+	<img src="../images/work/iphone2.png"/>
+	<img src="../images/work/iphone3.png"/>
+	<img src="../images/work/iphone4.png"/>
+	<img src="../images/work/iphone5.png"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>3D舞台展示</title>
+<style type="text/css">
+* { padding: 0; margin: 0; }
+
+body { background: #42509a; }
+ul { width: 800px; height: 500px; border: 1px solid #333; background: #05090e; overflow: hidden; position: relative; margin: 50px auto 0; }
+li { position: absolute; list-style: none; width: 240px; height: 135px; background-size: contain;}
+#pic1 { top: 210px; left: 550px; }
+#pic2 { top: 290px; left: 430px; }
+#pic3 { top: 215px; left: 220px; }
+#pic4 { top: 150px; left: 100px;  }
+#pic5 { top: 290px; left: 80px;  }
+#pic6 { top: 120px; left: 480px;  }
+#pic7 { top: 30px; left: 340px;  }
+#pic8 { top: -40px; left: -50px; width: 1422px; height: 1000px; background: url(../images/work/3d/bg.jpg) no-repeat; }
+
+p{text-align:center; padding:10px 0; color:#FFF;}
+p a{color:#FFF; text-decoration:none;}
+p a:hover{text-decoration:underline;}
+</style>
+    <script>
+        window.onload=function(){
+            var oUl=document.getElementById('ul_container');
+            var aLi=oUl.children;
+            var x=0,y=0;
+            document.onmousedown=function(ev){
+                var e=ev||event;
+                var disX= e.clientX-x;
+                var disY= e.clientY-y;
+                document.onmousemove=function(ev){
+                    var e=ev||event;
+                    x= e.clientX-disX;
+                    y= e.clientY-disY;
+
+                    //修改所有的li
+                    for(var i=0;i<aLi.length;i++){
+                        //aLi[i].style.left=aLi[i].offsetLeft+x+'px';
+                        //aLi[i].style.top=aLi[i].offsetTop+y+'px';
+                        aLi[i].style.marginLeft=(x*aLi[i].style.zIndex)/20+'px';
+                        aLi[i].style.marginTop=(y*aLi[i].style.zIndex)/20+'px';
+                    }
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=document.onmouseup=null;
+                };
+                return false;
+            };
+        };
+    </script>
+</head>
+
+<body>
+
+<ul id="ul_container">
+    <li id="pic1" style="z-index:1;background-image: url(../images/work/3d/11.jpg)"></li>
+    <li id="pic2" style="z-index:2;background-image: url(../images/work/3d/22.jpg)"></li>
+    <li id="pic3" style="z-index:3;background-image: url(../images/work/3d/33.jpg)"></li>
+    <li id="pic4" style="z-index:4;background-image: url(../images/work/3d/44.jpg)"></li>
+    <li id="pic5" style="z-index:5;background-image: url(../images/work/3d/55.jpg)"></li>
+    <li id="pic6" style="z-index:6;background-image: url(../images/work/3d/66.jpg)"></li>
+    <li id="pic7" style="z-index:7;background-image: url(../images/work/3d/77.jpg)"></li>
+    <li id="pic8" style="z-index:8;background-image: url(../images/work/3d/88.jpg)"></li>
+</ul>
+
+
+</body>
+</html>

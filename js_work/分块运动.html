@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>分块运动</title>
+<style>
+	*{padding:0;margin:0;list-style:none;}
+	input{display:block;width: 60px;height: 20px;margin:0 auto;}
+	#box{width:600px;height:400px;background:url(../images/work/fenkuai0.jpg) no-repeat;position:relative;margin:50px auto;}
+	#box span{position:absolute;background:url(../images/work/fenkuai0.jpg) no-repeat;opacity:0;filter:alpha(opacity=0);}
+</style>
+<script src="../js/onMove.js"></script>
+<script>
+	window.onload=function(){
+		var oBox=document.getElementById('box');
+		var oBtn=document.getElementById('btn');
+		
+		var R=4;
+		var C=6;
+		
+		for(var r=0;r<R;r++){
+			for(var c=0;c<C;c++){
+				var oSpan=document.createElement('span');
+				oSpan.style.width=oBox.offsetWidth/C+'px';
+				oSpan.style.height=oBox.offsetHeight/R+'px';
+				oBox.appendChild(oSpan);
+				oSpan.style.left=oSpan.offsetWidth*c+'px';
+				oSpan.style.top=oSpan.offsetHeight*r+'px';
+				oSpan.style.backgroundPosition='-'+oSpan.offsetWidth*c+'px -'+oSpan.offsetHeight*r+'px';	
+				oSpan.c=c;
+				oSpan.r=r;			
+			}
+		}
+		
+		var aSpan=document.getElementsByTagName('span');
+		
+		var timer=null;
+		var n=0;
+		var bOK=true;
+		oBtn.onclick=function(){
+			if(!bOK)return;
+			bOK=false;
+						
+			n++;
+			if(n%3==0){
+				oBox.style.backgroundImage='url(../images/work/fenkuai2.jpg)';
+			}else{
+				oBox.style.backgroundImage='url(../images/work/fenkuai'+(n%3-1)+'.jpg)';
+			}
+			
+			for(var i=0;i<aSpan.length;i++){
+				;(function(index){
+					setTimeout(function(){
+						//console.log('index:'+index);
+						aSpan[index].style.backgroundImage='url(../images/work/fenkuai'+(n%3)+'.jpg)';
+						aSpan[index].style.opacity=0;
+						
+						move(aSpan[index],{opacity:1},{complete:function(){						
+							if(index==aSpan.length-1){bOK=true;}	
+						}});
+					},100*(aSpan[index].c+aSpan[index].r));//斜对角的一起变换！
+				})(i)				
+			}			
+		};
+	};
+</script>
+</head>
+
+<body>
+	<div id="box">
+    	
+    </div>
+    <input type="button" value="下一页" id="btn"/>
+</body>
+</html>

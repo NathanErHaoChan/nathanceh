@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3D 图片环</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		body{
+			background: black;
+		}
+		.container{
+			position: relative;
+			width: 134px;
+			height: 500px;
+			/*background: white;*/
+			margin: 0px auto;
+			transform-style: preserve-3d;
+			perspective: 1200px;
+		}
+		.wrapper{
+			position: absolute;
+			height: 300px;
+			top:40%;
+			transform-style: preserve-3d;
+			transform: rotateX(-10deg);
+		}
+		.card{
+			position: absolute;
+			width: 133px;
+			height:200px; 
+			border-radius: 3px;
+			box-shadow: 0 0 10px white;
+		}
+		.shadow{
+			position: absolute;
+			width: 133px;
+			height:200px; 
+			top: 210px;
+			left: 0;
+			transform: scale(1,-1);
+			opacity: 0.5;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<ul class="wrapper"></ul>
+	</div>
+	<script type="text/javascript">
+		var oContainer=document.querySelector('.container');
+		var oWrapper=document.querySelector('.wrapper');
+
+		var count=10;
+		for (var index = 0; index < count; index++) {
+			var oCard=document.createElement('li');
+			oCard.classList.add('card');
+			oCard.style.backgroundImage=`url(../images/work/3d-circle/${index+1}.jpg)`;
+			oWrapper.appendChild(oCard);
+
+			;(function(oCard,index){
+				setTimeout(function(){
+					oCard.style.transition=`1s ${(count-index-1)*50}ms`;
+					oCard.style.transform=`rotateY(${360/count*index}deg) translateZ(400px)`;
+				})
+			})(oCard,index) 
+
+			var oShadow=document.createElement('div');
+			oShadow.classList.add('shadow');
+			oShadow.style.backgroundImage=`linear-gradient(rgba(0,0,0,1) 50%,rgba(0,0,0,0)),url(../images/work/3d-circle/${index+1}.jpg)`;
+			oCard.appendChild(oShadow);
+		}
+
+		var aCard=document.querySelectorAll('li');
+
+		//完成之后更改透明度
+		aCard[0].addEventListener('transitionend',function(){
+			aCard.forEach(function(oCard,index){
+				oCard.style.opacity=`${Math.abs((360/count*index-180))/180+0.2}`;
+			});
+		},false);
+
+		//拖拽
+		var oldX=0;
+		var oldY=0;
+		var translateX=0;
+		var translateY=25;
+		var speedX = 0;
+		var speedY = 0;
+		var timer=null;
+		document.onmousedown=function(ev){
+			var disX=ev.clientX-translateX;
+			var disY=ev.clientY-translateY;
+			clearTransition();
+			clearInterval(timer);
+			document.onmousemove=function(ev){
+				var deltaX=ev.clientX-disX;
+				var deltaY=ev.clientY-disY;
+
+				translateX=deltaX;
+				translateY=deltaY;
+
+				speedX=deltaX-oldX;
+				speedY=deltaY-oldY;
+
+				oldX=deltaX;
+				oldY=deltaY;
+				setPosition();
+			};
+			document.onmouseup=function(){
+				document.onmousemove=null;
+				document.onmouseup=null;
+				timer=setInterval(function(){
+					speedX *= 0.9;
+					speedY *= 0.9;
+					translateX+=speedX;
+					translateY+=speedY;
+					setPosition();
+					if(Math.abs(speedX)<0.1 && Math.abs(speedY)<0.1){
+						clearInterval(timer);
+					}
+				},30);
+			};
+			return false;
+		};
+		function setPosition(){
+			aCard.forEach(function(oCard,index){
+				oCard.style.opacity=`${Math.abs((Math.abs(360/count*index+translateX*0.4)%360-180)/180)+0.2}`;
+				oCard.style.transform=`rotateY(${360/count*index+translateX*0.4}deg) translateZ(400px)`;
+			});
+			oWrapper.style.transform=`rotateX(${-translateY*0.4}deg)`;
+		}
+		function clearTransition(){
+			aCard.forEach(function(oCard){
+				oCard.style.transition = '';
+			});
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>放大镜效果</title>
+<style>
+	*{margin:0;padding:0;}
+	#box1{width:200px;height:200px;/*border:1px solid #ccc;*/position:relative;margin-left:300px;margin-top:100px;float:left;}
+	#box1 img{width:100%;height:100%;}
+	span{width:100px;height:100px;background:blue;position:absolute;top:0;left:0;opacity:0.5;display:none;}
+	#box2{width:200px;height:200px;/*border:1px solid #ccc;*/float:left;margin-left:30px;margin-top:100px;overflow:hidden;display:none;position:relative;}
+	#img{width:400px;height:400px;position:absolute;top:0;left:0;}
+</style>
+<script>
+	function getPos(obj){
+		var l=0;
+		var t=0;
+		while(obj){
+			l+=obj.offsetLeft;
+			t+=obj.offsetTop;
+			obj=obj.offsetParent;
+		}
+		return {left:l,top:t};
+	}
+	window.onload=function(){
+		var oBox1=document.getElementById('box1');
+		var oBox2=document.getElementById('box2');
+		var oSpan=document.getElementById('span');
+		var oImg=document.getElementById('img');
+		
+		
+		oBox1.onmouseover=function(){
+			oBox2.style.display='block';
+			oSpan.style.display='block';
+		};
+		oBox1.onmouseout=function(){
+			oBox2.style.display='none';
+			oSpan.style.display='none';
+		};
+		
+		oBox1.onmousemove=function(ev){			
+			var oEvent=ev || event;
+			
+			var l=oEvent.clientX-getPos(oBox1).left-oSpan.offsetWidth/2;
+			var t=oEvent.clientY-getPos(oBox1).top-oSpan.offsetHeight/2;
+			
+			if(l<0){
+				l=0;
+			}else if(l>oBox1.offsetWidth-oSpan.offsetWidth){
+				l=oBox1.offsetWidth-oSpan.offsetWidth;
+			}
+			
+			if(t<0){
+				t=0;
+			}else if(t>oBox1.offsetHeight-oSpan.offsetHeight){
+				t=oBox1.offsetHeight-oSpan.offsetHeight;
+			}
+			
+			oSpan.style.left=l+'px';
+			oSpan.style.top=t+'px';
+			
+			oImg.style.left=-l/(oBox1.offsetWidth-oSpan.offsetWidth)*(oImg.offsetWidth-oBox2.offsetWidth)+'px';
+			oImg.style.top=-t/(oBox1.offsetHeight-oSpan.offsetHeight)*(oImg.offsetHeight-oBox2.offsetHeight)+'px';
+		};
+	};
+</script>
+</head>
+
+<body>
+	<div id="box1">
+    	<img src="../images/work/magnifier.jpg" alt="..."/>
+        <span id="span"></span>
+    </div>
+    <div id="box2">
+    	<img src="../images/work/magnifier.jpg" alt="..." id="img"/>
+    </div>
+</body>
+</html>

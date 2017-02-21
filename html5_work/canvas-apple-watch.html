@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas apple watch</title>
+	<style>
+		body{
+			margin: 0;
+		}
+
+		canvas{
+			background-color: white;
+		}
+	</style>
+</head>
+<body>
+	<canvas id="canvas" width="800" height="600"></canvas>
+	<script>
+		var canvas = document.getElementById('canvas');
+
+		var ctx = canvas.getContext('2d');
+		var degree = 0;
+
+		ctx.lineWidth = 30;
+		ctx.lineCap = 'round';
+
+		ctx.font = "40px chivo"
+		ctx.textBaseLine = "middle";
+		ctx.textAlign = "left";
+
+
+		setInterval(function(){
+			ctx.clearRect(0,0,canvas.offsetWidth,canvas.offsetHeight)
+
+			ctx.fillText('Apple Watch',100,100);
+
+			var date = new Date();
+
+			var hours = date.getHours();
+			var minutes = date.getMinutes();
+			var seconds = date.getSeconds();
+			var milliseconds = date.getMilliseconds();
+
+			// 时针
+			drawArc(0,(hours+minutes/60)%12/12*360);
+
+			// 分针
+			drawArc(1,(minutes+seconds/60)/60*360);
+
+			// 秒针
+			drawArc(2,(seconds+milliseconds/1000)/60*360);
+
+			ctx.fillText(`${addZero(hours)}:${addZero(minutes)}:${addZero(seconds)}`,450,500);
+		},16)
+
+		function drawArc(kind,enDegree){
+			var radiusArray = [120,80,40];
+			var colorArray = ["#CE1044","#8BFF0B","#86FCE6"]
+
+			ctx.beginPath();
+			ctx.strokeStyle = colorArray[kind]
+			ctx.arc(400,300,radiusArray[kind],d2a(0-90),d2a((enDegree)-90),false);
+
+			ctx.stroke();
+		}
+
+		function a2d(rad){
+			return rad/Math.PI*180;
+		}
+
+		function d2a(degree){
+			return degree*Math.PI/180;
+		}
+
+		function addZero(number){
+			return number > 10 ? number : '0' + number;
+		}
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+

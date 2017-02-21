@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>视差滚动</title>
+<style type="text/css">
+    
+    * { padding: 0; margin: 0; }
+
+    body { background: #42509a; height:3000px;}
+    ul { width: 800px; height: 500px; border: 1px solid #333; background: #05090e; overflow: hidden; position: fixed; left:50%; margin-left: -400px; top:50%; margin-top: -250px;}
+    li { position: absolute; list-style: none; }
+    #pic1 { top: 210px; left: 550px; }
+    #pic2 { top: 290px; left: 430px; }
+    #pic3 { top: 215px; left: 220px; }
+    #pic4 { top: 150px; left: 100px;  }
+    #pic6 { top: 290px; left: 80px;  }
+    #pic7 { top: 120px; left: 480px;  }
+    #pic8 { top: 60px; left: 380px;  }
+    #pic5 { top: -40px; left: -50px; width: 1422px; height: 1000px; background: url(../images/work/3d/bg.jpg) no-repeat; }
+
+    p{text-align:center; padding:10px 0; color:#FFF;}
+    p a{color:#FFF; text-decoration:none;}
+    p a:hover{text-decoration:underline;}
+</style>
+    <script>
+        window.onload=function(){
+            var oUl=document.getElementById('ul_container');
+            var aLi=oUl.children;
+
+            window.onscroll=function(){
+                var sTop=document.documentElement.scrollTop||document.body.scrollTop;
+
+                for(var i=0;i<aLi.length;i++){
+                    aLi[i].style.marginTop=-(sTop*aLi[i].style.zIndex)/20+'px';
+                }
+
+            };
+
+        };
+    </script>
+</head>
+
+<body>
+
+<ul id="ul_container">
+	<li id="pic1" style="z-index: 3;"><img src="../images/work/3d/1.jpg" alt="..." /></li>
+	<li id="pic2" style="z-index: 4;"><img src="../images/work/3d/2.jpg" alt="..." /></li>
+	<li id="pic3" style="z-index: 5;"><img src="../images/work/3d/3.jpg" alt="..." /></li>
+	<li id="pic4" style="z-index: 4;"><img src="../images/work/3d/4.jpg" alt="..." /></li>
+	<li id="pic6" style="z-index: 3;"><img src="../images/work/3d/5.jpg" alt="..." /></li>
+	<li id="pic7" style="z-index: 2;"><img src="../images/work/3d/6.jpg" alt="..." /></li>
+	<li id="pic8" style="z-index: 5;"><img src="../images/work/3d/7.jpg" alt="..." /></li>
+	<li id="pic5" style="z-index: 1;"></li>
+</ul>
+
+
+</body>
+</html>
