@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Nathan's Website</title>
+	<link rel="stylesheet" type="text/css" href="css/common.css">
+	<link rel="stylesheet" type="text/css" href="css/work.css">
+</head>
+<body>
+	<!-- header -->
+	<header>
+		<div class="header-nav clearfix">
+			<ul>
+				<li><a href="index.html">首页</a></li>
+				<li><a href="js_work.html">JS效果</a></li>
+				<li><a href="html5_work.html"  class="active">HTML5+CSS3作品</a></li>
+			</ul>
+		</div>
+		<div class="header-title">HTML5+CSS3 案例</div>
+	</header>	
+	<!-- header end -->
+
+	<!-- 作品展示(html5展示) -->
+	<content class="page">
+		
+		<div id="pxs_containter" class="pxs_containter">
+			<div class="pxs_bg">
+				<div class="pxs_bg1"></div>
+				<div class="pxs_bg2"></div>
+				<div class="pxs_bg3"></div>
+			</div>
+			<div class="pxs_loading">
+				<div class="loading">Loading images...</div>
+			</div>
+			<div class="pxs_slider_wrapper">
+				<ul class="pxs_slider">
+					<li>
+						<img src="images/1.jpg" alt="First Image"/>
+						<div class="introduce">
+							<h3>3D图片环</h3>
+							<p>利用js+css实现的一个3D picture ring小效果，可以实现上下左右拖拽效果，同时松手有缓慢减速运动</p>
+							<a href="html5_work/3D图片环.html" target="_blank">查看效果</a>
+						</div>	
+					</li>
+					<li>
+						<img src="images/2.jpg" alt="Second Image"/>
+						<div class="introduce">
+							<h3>CSS3图片展示效果</h3>
+							<p>利用css3+js实现三种图片展示效果,分别为爆炸形式轮播图、翻块形式轮播图、翻页形式轮播图。点击页面任意位置即可实现切换图片。</p>
+							<a href="html5_work/爆炸.html" target="_blank">爆炸效果</a>
+							<a href="html5_work/翻块轮播.html" target="_blank">翻块效果</a>
+							<a href="html5_work/翻页运动.html" target="_blank">翻页效果</a>
+						</div>
+					</li>
+					<li>
+						<img src="images/3.jpg" alt="Third Image"/>
+						<div class="introduce">
+							<h3>canvas动画</h3>
+							<p>利用html5中的canvas实现的三个运动效果的小粒子~</p>
+							<a href="html5_work/canvas.html" target="_blank">效果1</a>
+							<a href="html5_work/canvas-apple-watch.html" target="_blank">效果2</a>
+							<a href="html5_work/canvas-bear.html" target="_blank">效果3</a>
+						</div>
+					</li>
+					<li>
+						<img src="images/4.jpg" alt="Forth Image"/>
+						<div class="introduce">
+							<h3>音乐播放器</h3>
+							<p>利用audio标签制作的音乐播放器，爱心图片为切换播放模式，依次为循环播放、列表播放、单曲循环、随机播放、单曲播放</p>
+							<a href="html5_work/音乐播放器.html" target="_blank">查看效果</a>
+						</div>
+					</li>
+					<li>
+						<img src="images/5.jpg" alt="Fifth Image"/>
+						<div class="introduce">
+							<h3>钟表</h3>
+							<p>这是一个利用css3+js制作的圆盘钟表</p>
+							<a href="html5_work/钟表.html" target="_blank">查看效果</a>
+						</div>
+					</li>
+					<li>
+						<img src="images/6.jpg" alt="Sixth Image"/>
+						<div class="introduce">
+							<h3>视差板</h3>
+							<p>利用css3和js制作的视差板,其中日期是实时更新的</p>
+							<a href="html5_work/视差板.html" target="_blank">查看效果</a>
+						</div>
+					</li>
+				</ul>
+				<div class="pxs_navigation">
+					<span class="pxs_next"></span>
+					<span class="pxs_prev"></span>
+				</div>
+				<ul class="pxs_thumbnails">
+					<li><img src="images/thumbs/1.jpg" alt="First Images"/></li>
+					<li><img src="images/thumbs/2.jpg" alt="Second Images"/></li>
+					<li><img src="images/thumbs/3.jpg" alt="Third Images"/></li>
+					<li><img src="images/thumbs/4.jpg" alt="Forth Images"/></li>
+					<li><img src="images/thumbs/5.jpg" alt="Fifth Images"/></li>
+					<li><img src="images/thumbs/6.jpg" alt="Sixth Images"/></li>
+				</ul>
+			</div>
+		</div>
+	</content>
+	<!-- 作品展示(html5展示) end-->
+
+	<!-- header -->
+	<footer>
+		<!-- <div class="end noMargin"></div> -->
+		<div class="timeClock"></div>
+	</footer>
+	<!-- header -->
+
+	<script src="js/common.js"></script>
+	<script>
+		var oLoad = getByClass(document.body, 'pxs_loading')[0];
+		
+		var imgs = document.getElementsByTagName('img');
+		for(var i=0;i<imgs.length;i++)
+		{
+			imgs[i].onload = function()
+			{
+				oLoad.style.display = 'none';
+			}
+		}
+	</script>  
+	
+	<script src="js/onMove.js"></script>
+	<script src="js/html5_work.js"></script>
+</body>
+</html>
