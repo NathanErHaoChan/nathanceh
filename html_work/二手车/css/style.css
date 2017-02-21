@@ -1,0 +1,222 @@
+/* LESS Document */
+body {
+  background: #f2f2f2;
+}
+body .head .logo {
+  width: 28%;
+  min-width: 140px;
+  max-width: 280px;
+  display: table;
+}
+body .head .logo a {
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+}
+body .head .logo a img {
+  width: 100%;
+}
+body .head .map a {
+  display: block;
+  line-height: 50px;
+  background: url(../img/map.png) no-repeat 0 50%;
+  padding-left: 14px;
+}
+body .content {
+  min-width: 320px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+body .content .banner_box {
+  position: relative;
+}
+body .content .banner_box .banner a {
+  display: block;
+}
+body .content .banner_box .banner a img {
+  width: 100%;
+}
+body .content .banner_box .seach {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+body .content .banner_box .seach input {
+  width: 100%;
+  height: 36px;
+  box-sizing: border-box;
+  padding-left: 46px;
+}
+body .content .banner_box .seach i {
+  position: absolute;
+  width: 15px;
+  height: 18px;
+  background: url(../img/soo.png) no-repeat;
+  top: 50%;
+  margin-top: -9px;
+  left: 25px;
+}
+body .content .banner_box .dot {
+  position: absolute;
+  padding: 3px 6px;
+  background: #000;
+  opacity: 0.5;
+  top: 10px;
+  right: 10px;
+  border-radius: 5px;
+}
+body .content .banner_box .dot li {
+  float: left;
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  margin-left: 2px;
+  border-radius: 50%;
+}
+body .content .banner_box .dot li:first-child {
+  margin-left: 0;
+}
+body .content .banner_box .dot li.active {
+  background: #F60;
+}
+body .content .list {
+  background: #fff;
+}
+body .content .list li {
+  float: left;
+  width: 25%;
+  border-left: 1px solid #f2f2f2;
+  box-sizing: border-box;
+  text-align: center;
+}
+body .content .list li:last-child {
+  border-left-color: #fff;
+}
+body .content .list li a {
+  display: block;
+  padding: 10px 0;
+}
+body .content .list li a i {
+  display: block;
+  width: 35px;
+  height: 35px;
+  background: url(../img/icon1.png) no-repeat;
+  margin: 0 auto 3px;
+}
+body .content .list li:nth-child(2) i {
+  background-image: url(../img/icon2.png);
+}
+body .content .list li:nth-child(3) i {
+  background-image: url(../img/icon3.png);
+}
+body .content .hot {
+  margin: 10px 0;
+}
+body .content .hot li {
+  width: 50%;
+}
+body .content .hot li a {
+  display: block;
+}
+body .content .hot li a img {
+  width: 100%;
+}
+body .content .hot li:first-child {
+  border-left: 1px solid #fff;
+  box-sizing: border-box;
+}
+body .content .hot li:last-child {
+  border-left: 1px solid #f2f2f2;
+  box-sizing: border-box;
+}
+body .content .hot li:last-child a:last-child {
+  border-top: 1px solid #f2f2f2;
+  box-sizing: border-box;
+}
+body .content .column {
+  background: #fff;
+}
+body .content .column .sub_column {
+  overflow: hidden;
+}
+body .content .column .sub_column:nth-child(2) h3 {
+  border-left-color: #4881c9;
+}
+body .content .column .sub_column:nth-child(3) h3 {
+  border-left-color: #48c242;
+}
+body .content .column .sub_column h3 {
+  margin: 10px 0;
+  border-left: 5px solid #f37e0b;
+  padding-left: 10px;
+  height: 21px;
+  line-height: 21px;
+}
+body .content .column .sub_column ul li {
+  float: left;
+  width: 25%;
+  text-align: center;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  border-left: none;
+  margin-top: -1px;
+}
+body .content .column .sub_column ul li.cb {
+  border-right-color: #fff;
+}
+body .content .column .sub_column ul li a {
+  display: block;
+  padding: 16px 0;
+}
+body .content .column .sub_column.brand img {
+  width: 100%;
+  margin-bottom: 5px;
+}
+body .content .tips {
+  margin-top: 10px;
+}
+body .content .tips .tips_top a {
+  width: 50%;
+  display: block;
+  box-sizing: border-box;
+}
+body .content .tips .tips_top a:first-child {
+  border-right: 1px solid #f2f2f2;
+}
+body .content .tips .tips_top a:last-child {
+  border-left: 1px solid #f2f2f2;
+}
+body .content .tips .tips_top a img {
+  width: 100%;
+}
+body .content .tips .tips_bottom {
+  width: 100%;
+  display: block;
+}
+body .content .tips .tips_bottom img {
+  width: 100%;
+}
+body .foot {
+  background: #fff;
+  overflow: hidden;
+}
+body .foot .p1 {
+  margin-top: 19px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+body .foot .p1 a.b {
+  padding: 0 5px;
+  border-left: 2px solid #ddd;
+  border-right: 2px solid #ddd;
+}
+body .foot .p2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #9c9c9c;
+}
+body .foot .p2 span {
+  color: #ff9e06;
+}
